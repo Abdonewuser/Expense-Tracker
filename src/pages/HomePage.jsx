@@ -25,6 +25,10 @@ const HomePage = () => {
                                 <span className="type-badge">{transaction.type}</span>
                                 <span>{transaction.date}</span>
                             </div>
+                            <button onClick={() => {
+                                // Filter out the transaction with the matching id and update the transactions state
+                                setTransactions(transactions.filter(t => t.id !== transaction.id))
+                            }}>Delete</button>
                         </div>
                     ))
                 )}
