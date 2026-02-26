@@ -10,6 +10,20 @@ import TransactionForm from './pages/TransactionForm'
 
 
 function App() {
+  // Generate dummy transactions for testing
+  // useEffect(() => {
+  //   let dummyTransactions = []
+  //   for (let i = 0; i < 20; i++) {
+  //     dummyTransactions.push({
+  //       id: i + 1,
+  //       amount: (Math.random() * 100).toFixed(2),
+  //       type: Math.random() > 0.5 ? "income" : "expense",
+  //       desc: "Dummy transaction " + (i + 1),
+  //       date: new Date().toISOString().split('T')[0]
+  //     })
+  //   }
+  //   setTransactions(dummyTransactions)
+  // }, [])
   const [transactions, setTransactions] = useState(() => {
     const data = localStorage.getItem("transactions");
     return data ? JSON.parse(data) : []

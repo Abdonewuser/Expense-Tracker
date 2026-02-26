@@ -477,3 +477,57 @@ input[type="submit"]:active {
 .transaction-card button:active {
     transform: scale(0.97);
 }
+
+/* ── Income / Expense Totals ── */
+.totals-row {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 32px;
+}
+
+.total-card {
+    flex: 1;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    transition: border-color 0.2s ease;
+}
+
+.total-card.income {
+    border-left: 3px solid var(--income);
+}
+
+.total-card.expense {
+    border-left: 3px solid var(--expense);
+}
+
+.total-card:hover {
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+.total-card .total-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+.total-card .total-amount {
+    font-family: var(--font-display);
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+}
+
+.total-card.income .total-amount {
+    color: var(--income);
+}
+
+.total-card.expense .total-amount {
+    color: var(--expense);
+}

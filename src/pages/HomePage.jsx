@@ -1,14 +1,41 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useOutletContext } from "react-router-dom"
 
 const HomePage = () => {
     const { transactions, setTransactions } = useOutletContext()
+
+    let income = 0;
+    let expense = 0;
+
+    for (let i = 0; i < transactions.length; i++) {
+        if (
+            transactions[i].type === "income"
+        ) {
+            income = parseInt(transactions[i].amount) + income;
+        } else {
+            expense = parseInt(transactions[i].amount) + expense;
+        }
+    }
+
+
+
+
     return (
         <div className="main-content">
             <h1>Home</h1>
             <p className="welcome-text">Welcome to your Expense Tracker</p>
             <div className="homepage-meta">
                 <span>{transactions.length}</span> total transactions
+            </div>
+            <div className="totals-row">
+                <div className="total-card income">
+                    <span className="total-label">Total Income</span>
+                    <span className="total-amount">+${income}</span>
+                </div>
+                <div className="total-card expense">
+                    <span className="total-label">Total Expense</span>
+                    <span className="total-amount">-${expense}</span>
+                </div>
             </div>
             <div className="transaction-list">
                 {transactions.length === 0 ? (
