@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
 import Layout from './pages/Layout'
 import HomePage from './pages/HomePage'
@@ -10,7 +10,14 @@ import TransactionForm from './pages/TransactionForm'
 
 
 function App() {
-  const [transactions, setTransactions] = useState([])
+  const [transactions, setTransactions] = useState(() => {
+    const data = localStorage.getItem("transactions");
+    return data ? JSON.parse(data) : []
+  })
+
+  useEffect(() => {
+    localStorage.setItem("transactions", JSON.stringify(transactions))
+  }, [transactions])
 
   // Create Router
   const router = createBrowserRouter([
