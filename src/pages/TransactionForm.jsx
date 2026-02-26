@@ -1,46 +1,61 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
 import { v4 as uuidv4 } from 'uuid';
+import { useOutletContext } from "react-router-dom"
 
-const TransactionForm = ({ setTransactions }) => {
+const TransactionForm = () => {
+    const { transactions, setTransactions } = useOutletContext()
     const {
         register,
         handleSubmit,
-        watch,
+        reset,
         formState: { errors },
     } = useForm()
 
     const onSubmit = (data) => {
         let id = uuidv4();
-
-        console.log("I am data " + data.amount, data.type, data.desc, data.date, id)
-        setTransactions(
-            [...transactions, { id: id, amount: data.amount, type: data.type, desc: data.desc, date: data.date }]
-        )
-
+        setTransactions([...transactions, { id, amount: data.amount, type: data.type, desc: data.desc, date: data.date }])
+        reset()
     }
 
-
     return (
-        <div><form onSubmit={handleSubmit(onSubmit)}>
+        <div className="main-content">
+            <h1>Add Transaction</h1>
+            <div className="form-container">
+                <form onSubmit={handleSubmit(onSubmit)}>
 
-            <input
-                placeholder='$'
-                {...register("amount", { required: { value: true, message: "Please enter the amount" } })} />
-            {errors.amount && <div style={{ color: "red" }}>{errors.amount.message}</div>}
+                    <div className="form-group">
+                        <label className="form-label">Amount</label>
+                        <input
+                            placeholder="0.00"
+                            {...register("amount", { required: { value: true, message: "Please enter the amount" } })}
+                        />
+                        {errors.amount && <div className="error-msg">{errors.amount.message}</div>}
+                    </div>
 
-            <select {...register("type", { required: true })}>
-                <option value="">Select Transaction Type</option>
-                <option value="income">Income</option>
-                <option value="expense">Expense</option>
-            </select>
+                    <div className="form-group">
+                        <label className="form-label">Transaction Type</label>
+                        <select {...register("type", { required: true })}>
+                            <option value="">Select type...</option>
+                            <option value="income">Income</option>
+                            <option value="expense">Expense</option>
+                        </select>
+                    </div>
 
-            <input placeholder='Description'
-                {...register("desc")} />
+                    <div className="form-group">
+                        <label className="form-label">Description</label>
+                        <input placeholder="What was this for?" {...register("desc")} />
+                    </div>
 
-            <input type="date" {...register("date")} />
-            <input type="submit" />
-        </form></div>
+                    <div className="form-group">
+                        <label className="form-label">Date</label>
+                        <input type="date" {...register("date")} />
+                    </div>
+
+                    <input type="submit" value="Add Transaction" />
+                </form>
+            </div>
+        </div>
     )
 }
 

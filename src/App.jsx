@@ -25,7 +25,11 @@ function App() {
      */
     {
       path: "/",
-      element: <Layout />,
+      element: <Layout
+        // This way we can pass transactions and setTransactions to all child components of Layout through the Outlet context.
+        transactions={transactions}
+        setTransactions={setTransactions}
+      />,
       children: [
         {
           index: true,
