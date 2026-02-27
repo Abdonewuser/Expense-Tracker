@@ -1,4 +1,4 @@
-Expense Tracker — React Application
+💰 Expense Tracker — React Application
 
 A structured Expense Tracker application built using React that allows users to manage income and expenses through a multi-page interface using modern routing techniques.
 
